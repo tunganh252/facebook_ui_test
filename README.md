@@ -1,4 +1,4 @@
-# Flutter Facebook Responsive UI Tutorial
+<!-- # Flutter Facebook Responsive UI Tutorial
 
 [YouTube Tutorial](https://youtu.be/HvLb5gdUfDE)
 
@@ -8,4 +8,4 @@
 
 ![Web Screenshot](screenshots/facebook-web.png)
 
-![Widget & File Structure Diagram](screenshots/widget_file_structure_diagram.png)
+![Widget & File Structure Diagram](screenshots/widget_file_structure_diagram.png) -->

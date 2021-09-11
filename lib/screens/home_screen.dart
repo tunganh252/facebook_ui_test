@@ -13,56 +13,78 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            brightness: Brightness.light,
-            backgroundColor: Colors.white,
-            title: Text(
-              "facebook",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28.0,
-                  color: Palette.facebookBlue,
-                  letterSpacing: -1.2),
-            ),
-            centerTitle: false,
-            floating: true,
-            actions: [
-              CircleButton(
-                  icon: Icons.search,
-                  size: 30.0,
-                  color: Colors.black,
-                  onPress: () => print("Search")),
-              CircleButton(
-                  icon: MdiIcons.facebookMessenger,
-                  size: 30.0,
-                  color: Colors.black,
-                  onPress: () => print("Messenger"))
-            ],
-          ),
-          SliverToBoxAdapter(
-            child: CreatePostContainer(currentUser: currentUser),
-          ),
-          SliverPadding(
-            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
-            sliver: SliverToBoxAdapter(
-              child: Rooms(onlineUsers: onlineUsers),
-            ),
-          ),
-          SliverPadding(
-              padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
-              sliver: SliverToBoxAdapter(
-                child: Stories(currentUser: currentUser, stories: stories),
-              )),
-          SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-            final Post post = posts[index];
-            return PostContainer(post: post);
-          }, childCount: posts.length))
-        ],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: Responsive(
+          mobile: _HomeScreenMobile(),
+          desktop: _HomeScreenDesktop(),
+        ),
       ),
+    );
+  }
+}
+
+class _HomeScreenDesktop extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: null,
+    );
+  }
+}
+
+class _HomeScreenMobile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          brightness: Brightness.light,
+          backgroundColor: Colors.white,
+          title: Text(
+            "facebook",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 28.0,
+                color: Palette.facebookBlue,
+                letterSpacing: -1.2),
+          ),
+          centerTitle: false,
+          floating: true,
+          actions: [
+            CircleButton(
+                icon: Icons.search,
+                size: 30.0,
+                color: Colors.black,
+                onPress: () => print("Search")),
+            CircleButton(
+                icon: MdiIcons.facebookMessenger,
+                size: 30.0,
+                color: Colors.black,
+                onPress: () => print("Messenger"))
+          ],
+        ),
+        SliverToBoxAdapter(
+          child: CreatePostContainer(currentUser: currentUser),
+        ),
+        SliverPadding(
+          padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
+          sliver: SliverToBoxAdapter(
+            child: Rooms(onlineUsers: onlineUsers),
+          ),
+        ),
+        SliverPadding(
+            padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+            sliver: SliverToBoxAdapter(
+              child: Stories(currentUser: currentUser, stories: stories),
+            )),
+        SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+          final Post post = posts[index];
+          return PostContainer(post: post);
+        }, childCount: posts.length))
+      ],
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_responsive_ui/config/palette.dart';
 import 'package:flutter_facebook_responsive_ui/models/user_model.dart';
 import 'package:flutter_facebook_responsive_ui/widgets/widgets.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class CustomAppBar extends StatelessWidget {
   final List<IconData> icons;
@@ -38,16 +39,30 @@ class CustomAppBar extends StatelessWidget {
             ),
           ),
           Container(
+              height: double.infinity,
               width: 600,
               child: CustomTabBar(
-                icons: icons,
-                selectedIndex: selectedIndex,
-                onTap: onTap,
-              )),
+                  icons: icons,
+                  selectedIndex: selectedIndex,
+                  onTap: onTap,
+                  isBottomIndicator: true)),
           Expanded(
               child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [],
+            children: [
+              UserCard(user: currentUser),
+              SizedBox(width: 12.0),
+              CircleButton(
+                  icon: Icons.search,
+                  size: 30.0,
+                  color: Colors.black,
+                  onPress: () => print("search")),
+              CircleButton(
+                  icon: MdiIcons.facebookMessenger,
+                  size: 30.0,
+                  color: Colors.black,
+                  onPress: () => print("messenger"))
+            ],
           ))
         ],
       ),
